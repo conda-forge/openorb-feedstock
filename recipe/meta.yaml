@@ -12,7 +12,7 @@ source:
     - conda-compat.patch # git diff master..conda > ../staged-recipes/recipes/openorb/conda-compat.patch
 
 build:
-  number: 0
+  number: 1000
   skip: True  # [win]
 
 requirements:
