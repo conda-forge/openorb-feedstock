@@ -1,5 +1,5 @@
 {% set name = "openorb" %}
-{% set version = "1.0.1.20181030" %}
+{% set version = "1.0.1.20190102" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   git_url: https://github.com/oorb/oorb.git
-  git_rev: 6f9f8d32be2bbbfb6f402c2bda23c8620c9ede69
+  git_rev: bdeb9b15fbd51dd1f818ea4dc619693b26c39d5d
   patches:
     - conda-compat.patch # git diff master..conda > ../staged-recipes/recipes/openorb/conda-compat.patch
 
 build:
-  number: 1000
+  number: 0
   skip: True  # [win]
 
 requirements:
