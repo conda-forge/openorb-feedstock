@@ -71,17 +71,17 @@ index a09df43..0cbaf7b 100755
  include_file=Makefile.include
  rm -f $include_file
 diff --git a/make.config b/make.config
-index 1a5fab8..4f40d28 100644
+index 84205e5..0d7b079 100644
 --- a/make.config
 +++ b/make.config
-@@ -138,5 +138,6 @@ F90_MODULE_SOURCES = parameters.f90 \
+@@ -133,6 +133,7 @@ F90_MODULE_SOURCES = parameters.f90 \
+                      random.f90 \
+                      sort.f90 \
+                      statistics.f90 \
++                     cstrings.f90 \
+                      functions.f90 \
+                      linal.f90 \
                       estimators.f90 \
-                      planetary_data.f90 \
-                      cl_options.f90 \
--                     integrators.f90
-+                     integrators.f90 \
-+                     cstrings.f90
- 
 diff --git a/modules/cstrings.f90 b/modules/cstrings.f90
 new file mode 100644
 index 0000000..70d039b
