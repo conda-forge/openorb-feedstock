@@ -1,9 +1,7 @@
-build_number_decrement:
-- '0'
 channel_sources:
-- conda-forge/label/gcc7,defaults
+- conda-forge,defaults
 channel_targets:
-- conda-forge gcc7
+- conda-forge main
 docker_image:
 - condaforge/linux-anvil-comp7
 fortran_compiler:
@@ -16,9 +14,3 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - '2.7'
-zip_keys:
-- - fortran_compiler
-  - channel_sources
-  - channel_targets
-  - docker_image
-  - build_number_decrement
