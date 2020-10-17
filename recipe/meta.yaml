@@ -12,7 +12,7 @@ source:
     - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
 
 requirements:
