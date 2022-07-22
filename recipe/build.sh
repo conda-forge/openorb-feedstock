@@ -5,6 +5,6 @@ echo "gfortran = $(which gfortran)"
 echo "gfortran = $(which gfortran)"
 
 ./configure gfortran opt --prefix="$PREFIX" --with-pyoorb
-make clean
+
 make
 make install
