@@ -15,21 +15,18 @@ build:
   number: 0
   skip: True  # [win]
 
-os_version:
-  linux_64: cos7
+
 
 requirements:
   build:
     - {{ compiler('fortran') }}
     - liblapack
-    # - sysroot_linux-64 >=2.17
-    - sysroot_linux-64 2.17  # [linux64]
+    - sysroot_linux-64 # [linux64]
   host:
     - python
     - numpy
     - liblapack
-    # - sysroot_linux-64 >=2.17
-    - sysroot_linux-64 2.17  # [linux64]
+    - sysroot_linux-64 # [linux64]
   run:
     - python
     - numpy
