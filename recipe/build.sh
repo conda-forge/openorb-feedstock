@@ -4,7 +4,7 @@ echo "gfortran = $(which gfortran)"
 [[ ! -f "$BUILD_PREFIX/bin/gfortran" && ! -z "$GFORTRAN" ]] && ln -s "$GFORTRAN" "$BUILD_PREFIX/bin/gfortran"
 echo "gfortran = $(which gfortran)"
 
-./configure gfortran opt --prefix="$BUILD_PREFIX" --with-pyoorb
-
+./configure gfortran opt --prefix="$PREFIX" --with-pyoorb
+make clean
 make
 make install
