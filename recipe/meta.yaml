@@ -21,12 +21,12 @@ requirements:
   build:
     - {{ compiler('fortran') }}
     - liblapack
-    - sysroot_linux-64  # [linux64]
+    # - sysroot_linux-64  # [linux64]
   host:
     - python
     - numpy
     - liblapack
-    - sysroot_linux-64  # [linux64]
+    # - sysroot_linux-64  # [linux64]
   run:
     - python
     - numpy
