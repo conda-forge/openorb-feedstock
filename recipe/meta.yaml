@@ -6,33 +6,31 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/oorb/oorb.git
-  git_rev: ca56d561599a2a383d49895f3af3d0f577f8d7df
-  patches:
-   - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+  path: ../../oorb_dirac
+  #git_url: https://github.com/oorb/oorb.git
+  #git_rev: ca56d561599a2a383d49895f3af3d0f577f8d7df
+  #patches:
+  #  - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
 
 build:
   number: 0
   skip: True  # [win]
 
-
-
 requirements:
   build:
     - {{ compiler('fortran') }}
     - liblapack
-    # - sysroot_linux-64  # [linux64]
+    - sysroot_linux-64>=2.17
   host:
     - python
     - numpy
     - liblapack
-    # - sysroot_linux-64  # [linux64]
+    - sysroot_linux-64>=2.17
   run:
     - python
     - numpy
     - openorb-data
     - openorb-data-de430
-
 
 test:
   imports:
@@ -59,4 +57,3 @@ extra:
     - mjuric
     - bsipocz
     - rhiannonlynne
-    - caditi97
