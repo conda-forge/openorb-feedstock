@@ -17,6 +17,7 @@ build:
 
 requirements:
   build:
+    - make
     - {{ compiler('fortran') }}
   host:
     - python
