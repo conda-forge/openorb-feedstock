@@ -12,11 +12,12 @@ source:
     - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
 
 build:
-  number: 3
+  number: 4
   skip: True  # [win]
 
 requirements:
   build:
+    - make
     - {{ compiler('fortran') }}
   host:
     - python
