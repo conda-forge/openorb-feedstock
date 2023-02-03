@@ -1,60 +1,28 @@
 diff --git a/build/make.depends b/build/make.depends
-index d65e3bd..0915103 100644
+index 04edcae..200c8ac 100644
 --- a/build/make.depends
 +++ b/build/make.depends
-@@ -18,6 +18,10 @@ statistics.o:  ../modules/statistics.f90 parameters.mod  utilities.mod sort.mod
+@@ -2,9 +2,13 @@ parameters.o:  ../modules/parameters.f90
  	$(OBJBUILDCMD)
- statistics.mod: ../modules/statistics.f90 parameters.mod  utilities.mod sort.mod statistics.o
+ parameters.mod: ../modules/parameters.f90 parameters.o
  	$(MODBUILDCMD)
+-utilities.o:  ../modules/utilities.f90 parameters.mod
 +cstrings.o:  ../modules/cstrings.f90
-+	$(OBJBUILDCMD)
+ 	$(OBJBUILDCMD)
+-utilities.mod: ../modules/utilities.f90 parameters.mod utilities.o
 +cstrings.mod: ../modules/cstrings.f90 cstrings.o
 +	$(MODBUILDCMD)
- functions.o:  ../modules/functions.f90 parameters.mod
- 	$(OBJBUILDCMD)
- functions.mod: ../modules/functions.f90 parameters.mod functions.o
-@@ -46,9 +50,9 @@ data_structures.o:  ../modules/data_structures.f90  parameters.mod utilities.mod
- 	$(OBJBUILDCMD)
- data_structures.mod: ../modules/data_structures.f90  parameters.mod utilities.mod data_structures.o
++utilities.o:  ../modules/utilities.f90 parameters.mod cstrings.mod
++	$(OBJBUILDCMD)
++utilities.mod: ../modules/utilities.f90 parameters.mod cstrings.mod utilities.o
  	$(MODBUILDCMD)
--Base_class.o:  ../classes/Base_class.f90  ../classes/../prefix.h utilities.mod parameters.mod
-+Base_class.o:  ../classes/Base_class.f90  ../classes/../prefix.h utilities.mod parameters.mod cstrings.mod
- 	$(OBJBUILDCMD)
--base_cl.mod: ../classes/Base_class.f90  ../classes/../prefix.h utilities.mod parameters.mod Base_class.o
-+base_cl.mod: ../classes/Base_class.f90  ../classes/../prefix.h utilities.mod parameters.mod cstrings.mod Base_class.o
- 	$(MODBUILDCMD)
- Unit_class.o:  ../classes/Unit_class.f90 base_cl.mod
+ random.o:  ../modules/random.f90 parameters.mod
  	$(OBJBUILDCMD)
 diff --git a/classes/Base_class.f90 b/classes/Base_class.f90
-index 8e2e221..258794b 100644
+index 2f1b311..f36690e 100644
 --- a/classes/Base_class.f90
 +++ b/classes/Base_class.f90
-@@ -41,6 +41,7 @@ MODULE Base_cl
- 
-   USE utilities
-   USE parameters
-+  USE cstrings
-   IMPLICIT NONE
-   PRIVATE :: calendarDateToJulianDate
-   PRIVATE :: coordinatedUniversalTime
-@@ -622,8 +623,15 @@ CONTAINS
-        RETURN
-     END IF
- 
-+    ! If PREFIX has not been set, default to current directory
-+    ! for every subdir (backwards compatibility)
-+    IF (CSTR_LEN(PREFIX) == 0) THEN
-+       s2 = "."
-+       RETURN
-+    END IF
-+
-     ! Otherwise, return <PREFIX>/<subdir>
--    s2 = TRIM(PREFIX) // "/" // subdir
-+    s2 = FROM_CSTR(PREFIX) // "/" // subdir
- 
-   END FUNCTION resolveDirectory
- 
-@@ -631,7 +639,7 @@ CONTAINS
+@@ -624,7 +624,7 @@ CONTAINS
    SUBROUTINE setAccessToDataFiles()
  
      IMPLICIT NONE
@@ -64,7 +32,7 @@ index 8e2e221..258794b 100644
    END SUBROUTINE setAccessToDataFiles
  
 diff --git a/configure b/configure
-index a5119b1..781bb6d 100755
+index a53b7bf..9436a65 100755
 --- a/configure
 +++ b/configure
 @@ -100,7 +100,7 @@ rm -f "$prefix_h"
@@ -72,25 +40,58 @@ index a5119b1..781bb6d 100755
  echo 'CHARACTER(len=FNAME_LEN) :: PREFIX = "" &' >> "$prefix_h"
  echo "$PREFIX" | fold -b -w 60 | sed 's|.*|  \& // "&" \&|' >> "$prefix_h"
 -echo '  & // ""' >> "$prefix_h"
-+echo '  & // CHAR(0)' >> "$prefix_h"
++echo ' & // CHAR(0)' >> "$prefix_h"
  
  include_file=Makefile.include
  rm -f $include_file
 diff --git a/make.config b/make.config
-index 49fc5ed..25539f0 100644
+index e859953..3d9260f 100644
 --- a/make.config
 +++ b/make.config
-@@ -70,6 +70,7 @@ F90_MODULE_SOURCES = parameters.f90 \
+@@ -47,7 +47,13 @@ ifeq ($(shell uname),Darwin)
+ 	# Target a reasonably low version of OS X, for binary compatibility
+ 	export MACOSX_DEPLOYMENT_TARGET=10.9
+ else
+-	LD_LIB_PATH_VAR=LD_LIBRARY_PATH
++    LD_LIB_PATH_VAR=LD_LIBRARY_PATH
++
++    # The conda version of the MAC OSX gfortran compiler doesn't support
++    # the -flto compiler flag, so only define it if we aren't building on
++    # MAC OSX.
++    FLTO ?= -flto
++	
+ endif
+ 
+ # 
+@@ -66,6 +72,7 @@ F90_CLASS_SOURCES = Base_class.f90 \
+ 		    PhysicalParameters_class.f90
+ 
+ F90_MODULE_SOURCES = parameters.f90 \
++                     cstrings.f90 \
+                      utilities.f90 \
                       random.f90 \
                       sort.f90 \
-                      statistics.f90 \
-+                     cstrings.f90 \
-                      functions.f90 \
-                      linal.f90 \
-                      estimators.f90 \
+@@ -103,7 +110,7 @@ FC_SHARED_G95        = -dynamiclib -single_module -read_only_relocs suppress
+ 
+ # gfortran: 
+ FC_GFORTRAN               = gfortran
+-FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
++FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp $(FLTO) -pipe -funroll-loops -fstack-arrays -fno-protect-parens
+ FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
+ FC_INC_GFORTRAN           = -I
+ FC_SHARED_GFORTRAN        = -shared
+@@ -111,7 +118,7 @@ F2PY_FCOMPILER_GFORTRAN   = --fcompiler=gnu95
+ 
+ # flang: 
+ FC_FLANG                  = flang
+-FCOPTIONS_OPT_FLANG       = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
++FCOPTIONS_OPT_FLANG       = -O2 -fPIC -std=f95 -fall-intrinsics -cpp $(FLTO) -pipe -funroll-loops -fstack-arrays -fno-protect-parens
+ FCOPTIONS_DEB_FLANG       = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
+ FC_INC_FLANG              = -I
+ FC_SHARED_FLANG           = -shared
 diff --git a/modules/cstrings.f90 b/modules/cstrings.f90
 new file mode 100644
-index 0000000..70d039b
+index 0000000..f102a12
 --- /dev/null
 +++ b/modules/cstrings.f90
 @@ -0,0 +1,33 @@
@@ -127,3 +128,33 @@ index 0000000..70d039b
 +
 +
 +END MODULE CSTRINGS
+\ No newline at end of file
+diff --git a/modules/utilities.f90 b/modules/utilities.f90
+index 6d8a47d..f90769b 100644
+--- a/modules/utilities.f90
++++ b/modules/utilities.f90
+@@ -31,6 +31,7 @@
+ MODULE utilities
+ 
+   USE parameters
++  USE cstrings
+ 
+   IMPLICIT NONE
+   INCLUDE "../prefix.h"
+@@ -1677,8 +1678,15 @@ CONTAINS
+        RETURN
+     END IF
+ 
++    ! If PREFIX has not been set, default to current directory
++    ! for every subdir (backwards compatibility)
++    IF (CSTR_LEN(PREFIX) == 0) THEN
++       s2 = "."
++       RETURN
++    END IF
++
+     ! Otherwise, return <PREFIX>/<subdir>
+-    s2 = TRIM(PREFIX) // "/" // subdir
++    s2 = FROM_CSTR(PREFIX) // "/" // subdir
+ 
+   END FUNCTION resolveDirectory
+ 

@@ -1,18 +1,19 @@
 {% set name = "openorb" %}
-{% set version = "1.0.1.20191029" %}
+{% set version = "1.0.1.20221109" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
+  # path: ../../oorb_dirac
   git_url: https://github.com/oorb/oorb.git
-  git_rev: 475dc9db246bb3380e7d91f6e51fc3cb841f484a
+  git_rev: ca56d561599a2a383d49895f3af3d0f577f8d7df
   patches:
-    - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+   - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
 
 build:
-  number: 4
+  number: 0
   skip: True  # [win]
 
 requirements:
@@ -22,9 +23,11 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - make
     - {{ compiler('fortran') }}
+    - liblapack
   host:
     - python
     - numpy
+    - liblapack
   run:
     - python
     - numpy
