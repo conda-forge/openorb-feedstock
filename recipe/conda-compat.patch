@@ -52,14 +52,7 @@ index e859953..3d9260f 100644
  	# Target a reasonably low version of OS X, for binary compatibility
  	export MACOSX_DEPLOYMENT_TARGET=10.9
  else
--	LD_LIB_PATH_VAR=LD_LIBRARY_PATH
-+    LD_LIB_PATH_VAR=LD_LIBRARY_PATH
-+
-+    # The conda version of the MAC OSX gfortran compiler doesn't support
-+    # the -flto compiler flag, so only define it if we aren't building on
-+    # MAC OSX.
-+    FLTO ?= -flto
-+	
+	LD_LIB_PATH_VAR=LD_LIBRARY_PATH
  endif
  
  # 
@@ -75,8 +68,7 @@ index e859953..3d9260f 100644
  
  # gfortran: 
  FC_GFORTRAN               = gfortran
--FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
-+FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp $(FLTO) -pipe -funroll-loops -fstack-arrays -fno-protect-parens
+ FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
  FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
  FC_INC_GFORTRAN           = -I
  FC_SHARED_GFORTRAN        = -shared
