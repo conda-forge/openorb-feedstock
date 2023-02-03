@@ -7,8 +7,10 @@ echo "gfortran = $(which gfortran)"
 
 # If doing cross-compiling, hack the shebang for the f2py executable.
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  shebang="#\!$PREFIX/bin/python"
+  shebang="#\!$BUILD_PREFIX/bin/python"
   f2py_executable=`which f2py`
+  echo "Hacking shebang: " $shebang
+  echo "Into: " $f2py_executable
   sed -i "1s%.*%$shebang%" $f2py_executable
 fi
 
