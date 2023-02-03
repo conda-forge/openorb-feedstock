@@ -3,6 +3,7 @@
 echo "gfortran = $(which gfortran)"
 [[ ! -f "$BUILD_PREFIX/bin/gfortran" && ! -z "$GFORTRAN" ]] && ln -s "$GFORTRAN" "$BUILD_PREFIX/bin/gfortran"
 echo "gfortran = $(which gfortran)"
+echo "f2py = $(which f2py)"
 
 ./configure gfortran opt --prefix="$PREFIX" --with-pyoorb
 make clean
