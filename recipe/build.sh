@@ -12,6 +12,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   echo "Hacking shebang: " $shebang
   echo "Into: " $f2py_executable
   sed -i "1s%.*%$shebang%" $f2py_executable
+  cat $f2py_executable
 fi
 
 ./configure gfortran opt --prefix="$PREFIX" --with-pyoorb
