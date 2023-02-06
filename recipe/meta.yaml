@@ -22,7 +22,6 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - make
     - {{ compiler('fortran') }}
-    - libgfortran-devel_osx-64  # [build_platform != target_platform and build_platform == 'osx-64']
   host:
     - python
     - numpy
