@@ -1,0 +1,12 @@
+--- configure.orig	2023-02-06 09:35:42.000000000 -0800
++++ configure	2023-02-06 09:51:42.000000000 -0800
+@@ -191,7 +191,8 @@
+ 
+ elif [[ $1 == gfortran ]] ; then
+ 
+-    echo 'FC = $(FC_GFORTRAN)' > $include_file
++    echo FC_GFORTRAN = ${FC} > $include_file
++    echo 'FC = $(FC_GFORTRAN)' >> $include_file
+     if [[ $2 == opt ]] ; then
+ 	echo 'FCOPTIONS = $(FCOPTIONS_OPT_GFORTRAN)'"$ADDOPTS" >> $include_file
+     else

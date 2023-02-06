@@ -9,7 +9,8 @@ source:
   git_url: https://github.com/oorb/oorb.git
   git_rev: 475dc9db246bb3380e7d91f6e51fc3cb841f484a
   patches:
-    - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+    - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+    - 0002-use-conda-gfortran.patch
 
 build:
   number: 5
