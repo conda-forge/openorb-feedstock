@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
     - 0002-use-conda-gfortran.patch
+    - 0003-use-conda-libgfortran.patch
 
 build:
   number: 5

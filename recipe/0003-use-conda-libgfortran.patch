@@ -1,0 +1,11 @@
+--- make.config.orig	2023-03-09 15:51:31.000000000 -0800
++++ make.config	2023-03-09 15:50:23.000000000 -0800
+@@ -104,7 +104,7 @@
+ 
+ # gfortran: 
+ FC_GFORTRAN               = gfortran
+-FCOPTIONS_OPT_GFORTRAN    = -O3 -fPIC -std=f95 -fall-intrinsics -cpp
++FCOPTIONS_OPT_GFORTRAN    = -O3 -fPIC -std=f95 -fall-intrinsics -cpp -L${PREFIX}/lib
+ FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp
+ FC_INC_GFORTRAN           = -I
+ FC_SHARED_GFORTRAN        = -shared
