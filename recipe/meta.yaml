@@ -9,14 +9,19 @@ source:
   git_url: https://github.com/oorb/oorb.git
   git_rev: 475dc9db246bb3380e7d91f6e51fc3cb841f484a
   patches:
-    - conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+    - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+    - 0002-use-conda-gfortran.patch
+    - 0003-use-conda-libgfortran.patch
 
 build:
-  number: 4
+  number: 5
   skip: True  # [win]
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
     - make
     - {{ compiler('fortran') }}
   host:
@@ -24,7 +29,7 @@ requirements:
     - numpy
   run:
     - python
-    - numpy
+    - {{ pin_compatible('numpy') }}
     - openorb-data
     - openorb-data-de430
 
