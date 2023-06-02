@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openorb-feedsto
 
 Home: https://github.com/oorb/oorb
 
-Package license: GPL-3.0
+Package license: GPL-3.0-or-later
 
 Summary: An open-source orbit-computation package
 
@@ -20,7 +20,14 @@ Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>Travis</td>
+    <td>
+      <a href="https://app.travis-ci.com/conda-forge/openorb-feedstock">
+        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/openorb-feedstock/main.svg?label=Linux">
+      </a>
+    </td>
+  </tr>
     
   <tr>
     <td>Azure</td>
