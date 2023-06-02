@@ -14,7 +14,7 @@ source:
     - 0003-use-conda-libgfortran.patch
 
 build:
-  number: 5
+  number: 6
   skip: True  # [win]
 
 requirements:
@@ -43,7 +43,7 @@ test:
 
 about:
   home: https://github.com/oorb/oorb
-  license: GPL-3.0
+  license: GPL-3.0-or-later
   license_family: GPL
   license_file: COPYING
   summary: 'An open-source orbit-computation package'
