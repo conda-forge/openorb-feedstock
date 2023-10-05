@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/oorb/oorb/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f725a4986e72a9e0ed5f2ca3a05ba17f3d5d6b39147e547e015c875281d4d018
+  url: https://github.com/oorb/oorb/archive/refs/tags/v{{ version }}.zip
+  sha256: 992a40b48eab5651f341fb411d5ad089001d638a8a8e3563319ece1dc8b95ef3
   patches:
     - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
     - 0002-use-conda-gfortran.patch
