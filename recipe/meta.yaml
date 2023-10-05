@@ -1,20 +1,20 @@
 {% set name = "openorb" %}
-{% set version = "1.0.1.20191029" %}
+{% set version = "1.3.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  git_url: https://github.com/oorb/oorb.git
-  git_rev: 475dc9db246bb3380e7d91f6e51fc3cb841f484a
+  url: https://github.com/oorb/oorb/archive/refs/tags/v{{ version }}.zip
+  sha256: 992a40b48eab5651f341fb411d5ad089001d638a8a8e3563319ece1dc8b95ef3
   patches:
     - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
     - 0002-use-conda-gfortran.patch
     - 0003-use-conda-libgfortran.patch
 
 build:
-  number: 6
+  number: 0
   skip: True  # [win]
 
 requirements:
