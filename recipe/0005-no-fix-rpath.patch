@@ -1,0 +1,12 @@
+diff --git a/build/Makefile b/build/Makefile
+index 524a918..a07b799 100644
+--- a/build/Makefile
++++ b/build/Makefile
+@@ -60,7 +60,6 @@ $(addprefix ../bin/, $(PROGRAMS)): ../bin/%: ../main/%
+ 
+ $(addprefix ../main/, $(PROGRAMS)): ../main/%: %.o ../lib/liboorb.a
+ 	$(FC) $(FCOPTIONS) $^ $(ADDLIBS) -o $@.tmp
+-	fix-rpath.sh $@.tmp
+ 	mv $@.tmp $@
+ 
+ #

@@ -13,9 +13,10 @@ source:
     - 0002-use-conda-gfortran.patch
     - 0003-use-conda-libgfortran.patch
     - 0004-openorb-directory.patch
+    - 0005-no-fix-rpath.patch
 
 build:
-  number: 6
+  number: 0
   skip: True  # [win]
 
 requirements:
