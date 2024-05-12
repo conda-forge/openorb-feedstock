@@ -1,11 +1,13 @@
---- make.config.orig	2023-03-09 15:51:31.000000000 -0800
-+++ make.config	2023-03-09 15:50:23.000000000 -0800
-@@ -104,7 +104,7 @@
+diff --git a/make.config b/make.config
+index e65e7c7..fc127b7 100644
+--- a/make.config
++++ b/make.config
+@@ -103,7 +103,7 @@ FC_SHARED_G95        = -dynamiclib -single_module -read_only_relocs suppress
  
  # gfortran: 
  FC_GFORTRAN               = gfortran
--FCOPTIONS_OPT_GFORTRAN    = -O3 -fPIC -std=f95 -fall-intrinsics -cpp
-+FCOPTIONS_OPT_GFORTRAN    = -O3 -fPIC -std=f95 -fall-intrinsics -cpp -L${PREFIX}/lib
- FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp
+-FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
++FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -L${PREFIX}/lib
+ FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
  FC_INC_GFORTRAN           = -I
  FC_SHARED_GFORTRAN        = -shared
