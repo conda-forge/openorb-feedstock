@@ -12,8 +12,11 @@ source:
     - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
     - 0002-use-conda-gfortran.patch
     - 0003-use-conda-libgfortran.patch
-    - 0004-openorb-directory.patch
     - 0005-no-fix-rpath.patch
+    - 0006-cstring-prefix-fixups.patch
+
+# openorb-data provides share/openorb/TAI-UTC.dat
+# openorb provides share/oorb/TAI-UTC.dat
 
 build:
   number: 0
