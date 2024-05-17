@@ -14,7 +14,7 @@ source:
     - 0003-use-conda-libgfortran.patch
 
 build:
-  number: 6
+  number: 7
   skip: True  # [win]
 
 requirements:
@@ -24,12 +24,12 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - make
     - {{ compiler('fortran') }}
+    - {{ stdlib("c") }}
   host:
     - python
     - numpy
   run:
     - python
-    - {{ pin_compatible('numpy') }}
     - openorb-data
     - openorb-data-de430
 
