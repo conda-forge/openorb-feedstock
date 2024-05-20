@@ -9,14 +9,11 @@ source:
   git_url: https://github.com/oorb/oorb.git
   git_rev: 945178476f016dae8f3981b54a937f61de81360f
   patches:
-    - 0001-conda-compat.patch # git diff master..conda > ../conda-forge/openorb-feedstock/recipe/conda-compat.patch
+    - 0001-conda-compat.patch
     - 0002-use-conda-gfortran.patch
     - 0003-use-conda-libgfortran.patch
-    - 0005-no-fix-rpath.patch
+    - 0005-patch-build-makefile.patch
     - 0006-cstring-prefix-fixups.patch
-
-# openorb-data provides share/openorb/TAI-UTC.dat
-# openorb provides share/oorb/TAI-UTC.dat
 
 build:
   number: 0
@@ -27,11 +24,14 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
+    - meson-python                           # [build_platform != target_platform]
     - make
     - {{ compiler('fortran') }}
   host:
     - python
     - numpy
+    - meson =1.2.1
+    - meson-python =0.13.1
   run:
     - python
     - {{ pin_compatible('numpy') }}
