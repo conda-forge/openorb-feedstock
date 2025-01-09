@@ -278,6 +278,3 @@ Feedstock Maintainers
 * [@mjuric](https://github.com/mjuric/)
 * [@rhiannonlynne](https://github.com/rhiannonlynne/)
 
-
-<!-- dummy commit to enable rerendering -->
-
