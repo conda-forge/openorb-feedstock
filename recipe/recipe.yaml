@@ -16,6 +16,7 @@ source:
     - 0002-use-conda-gfortran.patch
     - 0003-link-conda-prefix.patch
     - 0004-cstring-fixups.patch
+    - 0005-configure.patch
     # - 0003-use-conda-libgfortran.patch
 
 build:
