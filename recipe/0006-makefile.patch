@@ -1,5 +1,5 @@
---- build-tools/Makefile
-+++ build-tools/Makefile
+--- build/Makefile
++++ build/Makefile
 @@ -59,9 +59,7 @@ $(addprefix ../bin/, $(PROGRAMS)): ../bin/%: ../main/%
  	cp -a $< $@
  
