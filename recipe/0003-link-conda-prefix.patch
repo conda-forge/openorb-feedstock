@@ -1,16 +1,5 @@
-From a9cf70c8869b8267b316c715fd15e051fdbe7875 Mon Sep 17 00:00:00 2001
-From: "Matthew R. Becker" <beckermr@users.noreply.github.com>
-Date: Mon, 17 Feb 2025 10:36:18 -0600
-Subject: [PATCH] fix: link to prefix
-
----
- make.config | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git make.config make.config
-index e65e7c70..5be59189 100644
---- make.config
-+++ make.config
+--- make.config	2023-02-06 09:35:42.000000000 -0800
++++ make.config 2023-02-06 09:35:42.000000000 -0800
 @@ -96,23 +96,23 @@ ALLSOURCES=$(LIBSOURCES) $(addsuffix .f90, $(addprefix ../main/, $(PROGRAMS))) .
  
  # g95: 
