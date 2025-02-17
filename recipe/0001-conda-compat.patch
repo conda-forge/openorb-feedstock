@@ -20,4 +20,3 @@
  
  include_file=Makefile.include
  rm -f $include_file
-
