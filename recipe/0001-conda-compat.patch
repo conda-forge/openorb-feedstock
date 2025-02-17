@@ -1,22 +1,5 @@
 --- classes/Base_class.f90
 +++ classes/Base_class.f90
-@@ -622,8 +623,15 @@ CONTAINS
-        RETURN
-     END IF
- 
-+    ! If PREFIX has not been set, default to current directory
-+    ! for every subdir (backwards compatibility)
-+    IF (CSTR_LEN(PREFIX) == 0) THEN
-+       s2 = "."
-+       RETURN
-+    END IF
-+
-     ! Otherwise, return <PREFIX>/<subdir>
--    s2 = TRIM(PREFIX) // "/" // subdir
-+    s2 = FROM_CSTR(PREFIX) // "/" // subdir
- 
-   END FUNCTION resolveDirectory
- 
 @@ -631,7 +639,7 @@ CONTAINS
    SUBROUTINE setAccessToDataFiles()
  
