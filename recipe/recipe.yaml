@@ -39,6 +39,7 @@ requirements:
     - python
     - setuptools
     - numpy
+    - liblapack
   run:
     - python
     - openorb-data
