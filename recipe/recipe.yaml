@@ -30,10 +30,12 @@ requirements:
     - if: build_platform != target_platform
       then: numpy
     - make
+    - meson
     - ${{ stdlib("c") }}
     - ${{ compiler('fortran') }}
   host:
     - python
+    - setuptools
     - numpy
   run:
     - python
