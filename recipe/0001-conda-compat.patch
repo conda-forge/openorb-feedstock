@@ -1,6 +1,6 @@
 --- classes/Base_class.f90
 +++ classes/Base_class.f90
-@@ -631,7 +639,7 @@ CONTAINS
+@@ -624,7 +624,7 @@ END FUNCTION rotationMatrix
    SUBROUTINE setAccessToDataFiles()
  
      IMPLICIT NONE
