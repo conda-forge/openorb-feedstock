@@ -15,7 +15,6 @@ Documentation: https://github.com/oorb/oorb/blob/master/README.md
 
 OpenOrb (or OOrb) is an open-source orbit-computation package.
 
-
 Current build status
 ====================
 
