@@ -14,7 +14,7 @@
  FC_GFORTRAN               = gfortran
 -FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
 -FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
-+FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens -L${PREFIX}/lib
++FCOPTIONS_OPT_GFORTRAN    = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -pipe -funroll-loops -fstack-arrays -fno-protect-parens -L${PREFIX}/lib
 +FCOPTIONS_DEB_GFORTRAN    = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe -L${PREFIX}/lib
  FC_INC_GFORTRAN           = -I
  FC_SHARED_GFORTRAN        = -shared
@@ -24,7 +24,7 @@
  FC_FLANG                  = flang
 -FCOPTIONS_OPT_FLANG       = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens
 -FCOPTIONS_DEB_FLANG       = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe
-+FCOPTIONS_OPT_FLANG       = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -flto -pipe -funroll-loops -fstack-arrays -fno-protect-parens -L${PREFIX}/lib
++FCOPTIONS_OPT_FLANG       = -O2 -fPIC -std=f95 -fall-intrinsics -cpp -pipe -funroll-loops -fstack-arrays -fno-protect-parens -L${PREFIX}/lib
 +FCOPTIONS_DEB_FLANG       = -g -O0 -fPIC -fbounds-check -pedantic -Wall -std=f95 -fall-intrinsics -cpp -pipe -L${PREFIX}/lib
  FC_INC_FLANG              = -I
  FC_SHARED_FLANG           = -shared
