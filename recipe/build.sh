@@ -6,10 +6,12 @@ build_numpy=$(${BUILD_PREFIX}/bin/python -c 'import site; print(site.getsitepack
 host_numpy=$(${PREFIX}/bin/python -c 'import site; print(site.getsitepackages()[0])')/numpy
 
 if [ -d "${build_numpy}" ]; then
-  pushd "${build_numpy}/f2py/_backends"
-  patch -b -p1 _meson.py < ${RECIPE_DIR}/f2py_meson.patch
-  rm -rf __pycache__
-  popd
+  if [[ "${build_numpy}" != "${host_numpy}" ]]; then
+    pushd "${build_numpy}/f2py/_backends"
+    patch -b -p1 _meson.py < ${RECIPE_DIR}/f2py_meson.patch
+    rm -rf __pycache__
+    popd
+  fi
 fi
 
 if [ -d "${host_numpy}" ]; then
@@ -37,10 +39,12 @@ make -j${CPU_COUNT}
 make install
 
 if [ -d "${build_numpy}" ]; then
-  pushd "${build_numpy}/f2py/_backends"
-  mv _meson.py.orig _meson.py
-  rm -rf __pycache__
-  popd
+  if [[ "${build_numpy}" != "${host_numpy}" ]]; then
+    pushd "${build_numpy}/f2py/_backends"
+    mv _meson.py.orig _meson.py
+    rm -rf __pycache__
+    popd
+  fi
 fi
 
 if [ -d "${host_numpy}" ]; then
