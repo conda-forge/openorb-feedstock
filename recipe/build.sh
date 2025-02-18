@@ -6,8 +6,8 @@ set -ex
 # distutils was
 if [[ "$(basename ${CONFIG_FILE})" == *_python3.12* ]]; then
   # CONDA_LIBORB is hacked in via a patch
-  export CONDA_LIBORB="../../lib/liboorb.a"
-  export FFLAGS="${FFLAGS} -I../../../build -L../../../lib"
+  export CONDA_LIBORB="../lib/liboorb.a"
+  export FFLAGS="${FFLAGS} -I../../../build"
 else
   export CONDA_LIBORB="../lib/liboorb.a"
 fi
