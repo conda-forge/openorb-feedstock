@@ -58,3 +58,9 @@ if [ -d "${host_numpy}" ]; then
   rm -rf __pycache__
   popd
 fi
+
+if [ -d "${BUILD_PREFIX}/venv" ]; then
+  ls -lah ${BUILD_PREFIX}/venv/*
+else
+  echo "no venv found!"
+fi
