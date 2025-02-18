@@ -4,7 +4,7 @@ set -ex
 
 # meson is used on 3.12 and is one more directory down than where
 # distutils was
-if [[ "$(python -V)" == "*3.12.*" ]]; then
+if [[ "$(basename ${CONFIG_FILE})" == "*_python3.12*" ]]; then
   # CONDA_LIBORB is hacked in via a patch
   export CONDA_LIBORB="../../lib/liboorb.a"
   export FFLAGS="${FFLAGS} -I../../../build -L../../../lib"
