@@ -20,7 +20,7 @@
  	}; \
 -	F77= $(F2PY) --quiet -m pyoorb pyoorb.o pyoorb.pyf ../lib/liboorb.a --build-dir ./_pyoorb_build -c --noarch \
 -	        $(F2PY_FCOMPILER) --f90exec=$(FC) --f90flags="$(FC_INC)../build $(FCOPTIONS)" $(ADDLIBS) && \
-+	F77= $(F2PY) -m pyoorb pyoorb.o pyoorb.pyf ${CONDA_LIBORB} --build-dir ./_pyoorb_build -c --noarch \
++	F77= $(F2PY) --verbose -m pyoorb pyoorb.o pyoorb.pyf ${CONDA_LIBORB} --build-dir ./_pyoorb_build -c --noarch \
 +	        $(F2PY_FCOMPILER) --f90exec=$(FC) --f90flags="$(FC_INC)../build $(FCOPTIONS) ${FFLAGS}" $(ADDLIBS) && \
  	mv $(PYOORB_SO) ../python
  	@ echo
