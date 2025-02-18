@@ -25,6 +25,8 @@ if [[ "${CONFIG}" == *_python3.12* ]]; then
   export MESON_ARGS=${MESON_ARGS//--prefix=${PREFIX}/""}
   if [[ "${build_platform}" != "${target_platform}" ]]; then
     export F2PY_MESON_CROSS_FILE=${BUILD_PREFIX}/meson_cross_file.txt
+    echo "meson cross file contents:"
+    cat ${F2PY_MESON_CROSS_FILE}
   fi
   export CONDA_LIBORB="pyoorb.pyf ../main/io.f90 ../python/*.f90 ../classes/*.f90 ../modules/*.f90 ${MESON_ARGS}"
   export FFLAGS="${FFLAGS} -I${SRC_DIR}/build"
