@@ -33,6 +33,7 @@ requirements:
       then: numpy
     - make
     - meson
+    - patch
     - ${{ stdlib("c") }}
     - ${{ compiler('fortran') }}
   host:
