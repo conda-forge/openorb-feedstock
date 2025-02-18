@@ -2,7 +2,7 @@
 
 set -ex
 
-if [[ "$(basename ${CONFIG_FILE})" == *_python3.12* ]]; then
+if [[ "${CONFIG}" == *_python3.12* ]]; then
   export CONDA_LIBORB="pyoorb.pyf ../main/io.f90 ../python/*.f90 ../classes/*.f90 ../modules/*.f90"
 else
   export CONDA_LIBORB="-m pyoorb pyoorb.o pyoorb.pyf ../lib/liboorb.a"
