@@ -1,0 +1,76 @@
+schema_version: 1
+
+context:
+  name: openorb
+  version: 1.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/oorb/oorb/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: f725a4986e72a9e0ed5f2ca3a05ba17f3d5d6b39147e547e015c875281d4d018
+  patches:
+    - 0001-conda-compat.patch
+    - 0002-use-conda-gfortran.patch
+    - 0003-link-conda-prefix.patch
+    - 0004-cstring-fixups.patch
+    - 0005-configure.patch
+    - 0006-makefile.patch
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: numpy
+    - make
+    - meson
+    - patch
+    - ninja
+    - pkg-config
+    - ${{ stdlib("c") }}
+    - ${{ compiler('fortran') }}
+  host:
+    - python
+    - setuptools
+    - numpy
+    - liblapack
+  run:
+    - python
+    - openorb-data
+    - openorb-data-de430
+
+tests:
+  - python:
+      imports:
+        - pyoorb
+  - files:
+      source:
+        - python/test.py
+    script:
+      - python python/test.py
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: An open-source orbit-computation package
+  description: |
+    OpenOrb (or OOrb) is an open-source orbit-computation package.
+  homepage: https://github.com/oorb/oorb
+  repository: https://github.com/oorb/oorb
+  documentation: https://github.com/oorb/oorb/blob/master/README.md
+
+extra:
+  recipe-maintainers:
+    - mjuric
+    - bsipocz
+    - rhiannonlynne
+    - beckermr

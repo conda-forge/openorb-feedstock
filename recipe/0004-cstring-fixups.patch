@@ -1,0 +1,48 @@
+--- modules/utilities.f90
++++ modules/utilities.f90
+@@ -159,7 +159,29 @@ MODULE utilities
+ CONTAINS
+ 
+ 
++  ! CSTRING INTERFACES
++  ! ------------------------
++  PURE INTEGER FUNCTION CSTR_LEN(s)  ! Returns the length of a C
++    CHARACTER(*), INTENT(IN) :: s      ! string (that can have any number of
++    INTEGER :: i                       ! NULL characters at the end)
++
++    CSTR_LEN = LEN_TRIM(s)
++    DO i = 1, LEN_TRIM(s)
++       IF (s(i:i) == CHAR(0)) THEN
++          CSTR_LEN = i - 1
++          EXIT
++       END IF
++    END DO
++
++  END FUNCTION CSTR_LEN
++
+ 
++  ! ------------------------
++  FUNCTION FROM_CSTR(s) RESULT(s2)   ! Returns a FORTRAN string from a C
++    CHARACTER(*),INTENT(IN) :: s       ! string (that can have any number of
++    CHARACTER(CSTR_LEN(s)) :: s2       ! NULL characters at the end)
++    s2 = s
++  END FUNCTION FROM_CSTR
+ 
+ 
+   INTEGER(iprec16) FUNCTION arrayToInteger_r8i16(array, elements, bin_size, nbins, bounds, error)
+@@ -1832,8 +1854,15 @@ CONTAINS
+        RETURN
+     END IF
+ 
++    ! If PREFIX has not been set, default to current directory
++    ! for every subdir (backwards compatibility)
++    IF (CSTR_LEN(PREFIX) == 0) THEN
++       s2 = "."
++       RETURN
++    END IF
++
+     ! Otherwise, return <PREFIX>/<subdir>
+-    s2 = TRIM(PREFIX) // "/" // subdir
++    s2 = FROM_CSTR(PREFIX) // "/" // subdir
+ 
+   END FUNCTION resolveDirectory

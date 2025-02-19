@@ -1,0 +1,18 @@
+--- a/numpy/f2py/_backends/_meson.py
++++ b/numpy/f2py/_backends/_meson.py
+@@ -181,6 +181,15 @@ def _run_subprocess_command(self, command, cwd):
+ 
+     def run_meson(self, build_dir: Path):
+         setup_command = ["meson", "setup", self.meson_build_dir]
++        if "F2PY_MESON_CROSS_FILE" in os.environ:
++            print(">>>>> Injecting MESON --cross-file:", os.environ["F2PY_MESON_CROSS_FILE"], flush=True)
++            setup_command = [
++                "meson",
++                "setup",
++                ("--cross-file=" + os.environ["F2PY_MESON_CROSS_FILE"]
++                + ""),
++                self.meson_build_dir,
++            ]
+         self._run_subprocess_command(setup_command, build_dir)
+         compile_command = ["meson", "compile", "-C", self.meson_build_dir]
+         self._run_subprocess_command(compile_command, build_dir)
