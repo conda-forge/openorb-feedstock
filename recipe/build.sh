@@ -34,7 +34,7 @@ for npdir in ${build_numpy} ${build_venv_numpy} ${host_numpy}; do
 done
 
 # on python 3.12 and higher, we have to use meson to build
-if [[ "${CONFIG}" == *_python3.12* ]]; then
+if [[ "${CONFIG}" != *python3.10* ]] && [[ "${CONFIG}" != *python3.11* ]]; then
   # here we setup the cross-compiled builds with meson if needed
   if [[ "${build_platform}" != "${target_platform}" ]]; then
     export F2PY_MESON_CROSS_FILE=${BUILD_PREFIX}/meson_cross_file.txt
