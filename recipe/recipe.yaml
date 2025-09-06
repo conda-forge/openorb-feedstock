@@ -20,17 +20,16 @@ source:
     - 0006-makefile.patch
 
 build:
-  number: 0
+  number: 1
   skip: win
 
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: numpy
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - numpy
     - make
     - meson
     - patch
