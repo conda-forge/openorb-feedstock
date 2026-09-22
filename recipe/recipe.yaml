@@ -20,8 +20,8 @@ source:
     - 0006-makefile.patch
 
 build:
-  number: 1
-  skip: win
+  number: 2
+  skip: win or match(python, "3.11.*")
 
 requirements:
   build:
